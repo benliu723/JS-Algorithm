@@ -52,10 +52,6 @@
       "<rootDir>/\\node_modules/",
       "<rootDir>/\\coverage/",
       "<rootDir>/\\example/"
-
-
-
-
     ]
   }
 }
