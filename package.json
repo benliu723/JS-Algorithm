@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "flow && eslint .",
     "test": "jest --coverage",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged && yarn jest --coverage"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"],
