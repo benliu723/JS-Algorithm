@@ -4,6 +4,6 @@ const left = (i: number): number => 2 * i;
 const right = (i: number): number => 2 * i + 1;
 
 var a = 1;
-console.log(a);
+var a = 2;
 
 export { parent, left, right };
