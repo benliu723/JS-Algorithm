@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --coverage",
+    "pretest": "flow && eslint .",
+    "test": "jest --coverage",
     "precommit": "lint-staged && yarn jest --coverage"
   },
   "lint-staged": {
-      "*.js": ["eslint --fix", "git add"],
+      "*.{js}": ["eslint --fix", "git add"],
       "*.{json,md}": ["prettier --write", "git add"]
   },
   "author": "benliu723@gmail.com",
