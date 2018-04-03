@@ -9,7 +9,8 @@
     "precommit": "lint-staged && yarn jest --coverage"
   },
   "lint-staged": {
-      
+    "*.js": ["eslint --fix", "git add"],
+    "*.{json,md}": ["prettier --write", "git add"]
   },
   "author": "benliu723@gmail.com",
   "license": "ISC",
@@ -36,18 +37,9 @@
   },
   "jest": {
     "verbose": true,
-    "collectCoverageFrom": [
-      "**/*.{js}",
-      "!**/node_modules/**"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/coverage/",
-      "/example/"
-    ],
-    "coverageReporters": [
-      "text"
-    ],
+    "collectCoverageFrom": ["**/*.{js}", "!**/node_modules/**"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/coverage/", "/example/"],
+    "coverageReporters": ["text"],
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -60,6 +52,10 @@
       "<rootDir>/\\node_modules/",
       "<rootDir>/\\coverage/",
       "<rootDir>/\\example/"
+
+
+
+      
     ]
   }
 }
