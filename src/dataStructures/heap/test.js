@@ -1,6 +1,16 @@
 // @flow
 import * as utils from '../../utils';
-import buildHeap, { isMaxHeap, isMinHeap, left, right, parent, adjustHeap } from '.';
+import {
+    buildMaxHeap,
+    buildMinHeap,
+    maxHeapify,
+    minHeapify,
+    isMaxHeap,
+    isMinHeap,
+    left,
+    right,
+    parent,
+} from '.';
 
 describe('heap', () => {
     it('isMaxHeap', () => {
@@ -29,7 +39,7 @@ describe('heap', () => {
             items: [10, 20, 4, 3, 12],
             heapSize: 5,
         };
-        adjustHeap(heap, 0, 'max');
+        maxHeapify(heap, 0);
         expect(heap.items).toEqual([20, 12, 4, 3, 10]);
     });
     it('adjust min heap', () => {
@@ -37,17 +47,17 @@ describe('heap', () => {
             items: [10, 20, 4, 3, 12],
             heapSize: 5,
         };
-        adjustHeap(heap, 0, 'min');
+        minHeapify(heap, 0);
         expect(heap.items).toEqual([4, 20, 10, 3, 12]);
     });
     it('build max heap', () => {
         const arr = utils.random(10, 100);
-        buildHeap(arr, 'max');
+        buildMaxHeap(arr);
         expect(isMaxHeap(arr)).toBeTruthy();
     });
     it('build min heap', () => {
         const arr = utils.random(10, 100);
-        buildHeap(arr, 'min');
+        buildMinHeap(arr);
         expect(isMinHeap(arr)).toBeTruthy();
     });
 });

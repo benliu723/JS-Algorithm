@@ -6,13 +6,11 @@ type Heap = {
     heapSize: number,
 };
 
-type HeapType = 'max' | 'min';
-
 export const parent = (i: number): number => Math.floor((i + 1) / 2) - 1;
 export const left = (i: number): number => 2 * i + 1;
 export const right = (i: number): number => 2 * i + 2;
 
-const maxHeapify = (heap: Heap, i: number) => {
+export const maxHeapify = (heap: Heap, i: number) => {
     const l = left(i);
     const r = right(i);
     let largest = i;
@@ -29,7 +27,7 @@ const maxHeapify = (heap: Heap, i: number) => {
     }
 };
 
-const minHeapify = (heap: Heap, i: number) => {
+export const minHeapify = (heap: Heap, i: number) => {
     const l = left(i);
     const r = right(i);
     let largest = i;
@@ -46,19 +44,20 @@ const minHeapify = (heap: Heap, i: number) => {
     }
 };
 
-export const adjustHeap = (heap: Heap, i: number, type: HeapType) => {
-    if (type === 'max') {
-        maxHeapify(heap, i);
-    } else {
-        minHeapify(heap, i);
-    }
-};
-
-const buildHeap = (items: Array<number>, type: HeapType) => {
+export const buildMaxHeap = (items: Array<number>) => {
     const heap = { heapSize: items.length, items };
     for (let i = heap.heapSize / 2 - 1; i >= 0; i -= 1) {
-        adjustHeap(heap, i, type);
+        maxHeapify(heap, i);
     }
+    return heap;
+};
+
+export const buildMinHeap = (items: Array<number>) => {
+    const heap = { heapSize: items.length, items };
+    for (let i = heap.heapSize / 2 - 1; i >= 0; i -= 1) {
+        minHeapify(heap, i);
+    }
+    return heap;
 };
 
 export const isMaxHeap = (arr: Array<number>): boolean => {
@@ -78,5 +77,3 @@ export const isMinHeap = (arr: Array<number>): boolean => {
     }
     return true;
 };
-
-export default buildHeap;
