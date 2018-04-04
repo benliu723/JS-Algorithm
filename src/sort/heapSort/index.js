@@ -1,6 +1,11 @@
 // @flow
-import { buildMaxHeap, buildMinHeap, maxHeapify, minHeapify } from '../../heap';
-import * as utils from '../../../utils';
+import {
+    buildMaxHeap,
+    buildMinHeap,
+    maxHeapify,
+    minHeapify,
+} from '../../dataStructures/heap';
+import * as utils from '../../utils';
 
 export const heapSort = (arr: Array<number>) => {
     const heap = buildMaxHeap(arr);
