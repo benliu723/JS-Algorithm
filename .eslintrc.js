@@ -7,6 +7,7 @@ module.exports = {
         node: true,
     },
     rules: {
+        'import/prefer-default-export': 'off',
         'prettier/prettier': 'error',
     },
 };

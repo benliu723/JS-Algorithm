@@ -29,6 +29,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.69.0",
+    "flow-typed": "^2.4.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.0.2",
@@ -37,7 +38,7 @@
   },
   "jest": {
     "verbose": true,
-    "collectCoverageFrom": ["**/*.{js}", "!**/node_modules/**"],
+    "collectCoverageFrom": ["**/*.{js}", "!**/node_modules/**", "!.eslintrc.js"],
     "coveragePathIgnorePatterns": ["/node_modules/", "/coverage/", "/example/"],
     "coverageReporters": ["text"],
     "coverageThreshold": {
