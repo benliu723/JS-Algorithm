@@ -1,5 +1,5 @@
 // @flow
-import * as heap from './dataStructures/heap';
+import * as heap from './ds/heap';
 import * as heapSort from './sort/heapSort';
 
 export default {
@@ -7,6 +7,6 @@ export default {
         ...heap,
     },
     sort: {
-        ...heapSort,
+        heapSort,
     },
 };
