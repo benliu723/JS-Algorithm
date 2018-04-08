@@ -1,3 +1,5 @@
 {
-    "presets": ["es2015", "flow"]
+    "presets": ["es2015", "flow"],
+    "ignore": ["node-modules/**"],
+    "plugins": ["transform-object-rest-spread"]
 }
