@@ -1,17 +1,14 @@
 // @flow
 import * as utils from '../../utils';
 
-class Heap {
+class Heap<T> {
     heapSize: number;
-    parent: number => number;
-    left: number => number;
-    right: number => number;
-    items: Array<number>;
-    comparator: (number, number) => boolean;
-    isHeap: () => boolean;
-    constructor(items: Array<number>) {
+    items: Array<T>;
+    comparator: (T, T) => boolean;
+    constructor(items: Array<T>, comp: (T, T) => boolean) {
         this.heapSize = items.length;
         this.items = items;
+        this.comparator = comp;
     }
     parent = (i: number): number => Math.floor((i + 1) / 2) - 1;
     left = (i: number): number => 2 * i + 1;
@@ -21,10 +18,10 @@ class Heap {
         let largest = i;
         const l = left(i);
         const r = right(i);
-        if (l < heapSize && comparator(l, largest)) {
+        if (l < heapSize && comparator(items[l], items[largest])) {
             largest = l;
         }
-        if (r < heapSize && comparator(r, largest)) {
+        if (r < heapSize && comparator(items[r], items[largest])) {
             largest = r;
         }
         if (i !== largest) {
@@ -38,18 +35,18 @@ class Heap {
             heapify(i);
         }
     };
-    isHeap = () => {
+    isHeap = (): boolean => {
         const { items, comparator, parent } = this;
         let i = items.length - 1;
         while (i >= 0 && parent(i) >= 0) {
-            if (comparator(i, parent(i))) {
+            if (comparator(items[i], items[parent(i)])) {
                 return false;
             }
             i -= 1;
         }
         return true;
     };
-    shift = () => {
+    shift = (): T => {
         const { items, heapify } = this;
         utils.swap(items, 0, this.heapSize - 1);
         this.heapSize -= 1;
@@ -58,58 +55,44 @@ class Heap {
     };
 }
 
-class MaxHeap extends Heap {
-    extractMax: () => number;
-    increaseKey: (number, number) => void;
-    append: number => void;
-    maximum: () => number;
-    comparator = (i: number, j: number) => {
-        const { items } = this;
-        return items[i] > items[j];
-    };
+class MaxHeap<T> extends Heap<T> {
     maximum = () => this.items[0];
     extractMax = () => this.shift();
-    increaseKey = (i: number, key: number) => {
+    increaseKey = (i: number, key: T) => {
         const { parent, comparator, items } = this;
         items[i] = key;
         let cursor = i;
-        while (parent(cursor) >= 0 && comparator(cursor, parent(cursor))) {
+        while (parent(cursor) >= 0 && comparator(items[cursor], items[parent(cursor)])) {
             utils.swap(items, cursor, parent(cursor));
             cursor = parent(cursor);
         }
     };
-    append = (key: number) => {
+    append = (key: T) => {
         const { items, increaseKey } = this;
         this.heapSize += 1;
-        items.push(-Infinity);
+        items.push(key);
+        // $FlowFixMe
         increaseKey(this.heapSize - 1, key);
     };
 }
 
-class MinHeap extends Heap {
-    extractMin: () => number;
-    minimum: () => number;
-    decreaseKey: (number, number) => void;
-    append: number => void;
-    comparator = (i: number, j: number) => {
-        const { items } = this;
-        return items[i] < items[j];
-    };
-    minimum = () => this.items[0];
+class MinHeap<T> extends Heap<T> {
+    minimum = (): T => this.items[0];
     extractMin = () => this.shift();
-    decreaseKey = (i: number, key: number) => {
+    decreaseKey = (i: number, key: T): void => {
         const { parent, comparator, items } = this;
         items[i] = key;
         let cursor = i;
-        while (parent(cursor) >= 0 && comparator(cursor, parent(cursor))) {
+        while (parent(cursor) >= 0 && comparator(items[cursor], items[parent(cursor)])) {
             utils.swap(items, cursor, parent(cursor));
             cursor = parent(cursor);
         }
     };
-    append = (key: number) => {
+    append = (key: T) => {
         const { items, decreaseKey } = this;
         this.heapSize += 1;
-        items.push(Infinity);
+        items.push(key);
+        // $FlowFixMe
         decreaseKey(this.heapSize - 1, key);
     };
 }

@@ -2,8 +2,8 @@
 import { MaxHeap, MinHeap } from '../../ds/heap';
 import * as utils from '../../utils';
 
-export const heapSort = (items: Array<number>) => {
-    const heap = new MaxHeap(items);
+export const heapSort = <T>(items: Array<T>, comp: (T, T) => boolean) => {
+    const heap = new MaxHeap(items, comp);
     heap.build();
     let i = heap.heapSize - 1;
     while (i > 0) {
@@ -14,8 +14,8 @@ export const heapSort = (items: Array<number>) => {
     }
 };
 
-export const reverseHeapSort = (items: Array<number>) => {
-    const heap = new MinHeap(items);
+export const reverseHeapSort = <T>(items: Array<T>, comp: (T, T) => boolean) => {
+    const heap = new MinHeap(items, comp);
     heap.build();
     let i = heap.heapSize - 1;
     while (i > 0) {

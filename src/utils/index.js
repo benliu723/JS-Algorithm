@@ -1,5 +1,5 @@
 // @flow
-export const swap = (items: Array<number>, i: number, j: number) => {
+export const swap = <T>(items: Array<T>, i: number, j: number) => {
     /* eslint-disable no-param-reassign */
     const temp = items[i];
     items[i] = items[j];
