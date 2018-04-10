@@ -3,5 +3,6 @@
     "ignore": ["node-modules/**"],
     "plugins": [
         "transform-object-rest-spread",
+        "transform-class-properties"
     ]
 }

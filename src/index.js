@@ -4,7 +4,7 @@ import * as heapSort from './sort/heapSort';
 
 export default {
     ds: {
-        ...heap,
+        heap,
     },
     sort: {
         heapSort,

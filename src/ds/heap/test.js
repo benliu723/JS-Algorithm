@@ -1,63 +1,66 @@
 // @flow
 import * as utils from '../../utils';
-import {
-    buildMaxHeap,
-    buildMinHeap,
-    maxHeapify,
-    minHeapify,
-    isMaxHeap,
-    isMinHeap,
-    left,
-    right,
-    parent,
-} from '.';
+import { MaxHeap, MinHeap } from '.';
 
 describe('heap', () => {
-    it('isMaxHeap', () => {
-        expect(isMaxHeap([10, 5, 6, 3, 4, 2, 1])).toBeTruthy();
-        expect(isMaxHeap([10, 5, 6, 6, 4, 2, 1])).toBeFalsy();
-        expect(isMaxHeap([78, 96, 39, 77, 68, 37, 8, 3, 39, 37])).toBeFalsy();
-    });
-    it('isMinHeap', () => {
-        expect(isMinHeap([3, 7, 10, 40, 62, 92, 55, 65, 51, 71])).toBeTruthy();
-        expect(isMinHeap([3, 40, 10, 7, 62, 92, 55, 65, 51, 71])).toBeFalsy();
-    });
-    it('left', () => {
-        expect(left(3)).toBe(7);
-        expect(left(2)).toBe(5);
-    });
-    it('right', () => {
-        expect(right(6)).toBe(14);
-        expect(right(2)).toBe(6);
-    });
-    it('parent', () => {
-        expect(parent(0)).toBe(-1);
-        expect(parent(10)).toBe(4);
-    });
-    it('adjust max heap', () => {
-        const heap = {
-            items: [10, 20, 4, 3, 12],
-            heapSize: 5,
-        };
-        maxHeapify(heap, 0);
-        expect(heap.items).toEqual([20, 12, 4, 3, 10]);
-    });
-    it('adjust min heap', () => {
-        const heap = {
-            items: [10, 20, 4, 3, 12],
-            heapSize: 5,
-        };
-        minHeapify(heap, 0);
-        expect(heap.items).toEqual([4, 20, 10, 3, 12]);
-    });
     it('build max heap', () => {
-        const arr = utils.random(10, 100);
-        buildMaxHeap(arr);
-        expect(isMaxHeap(arr)).toBeTruthy();
+        const heap = new MaxHeap(utils.random(10, 100));
+        heap.build();
+        expect(heap.isHeap()).toBeTruthy();
     });
     it('build min heap', () => {
-        const arr = utils.random(10, 100);
-        buildMinHeap(arr);
-        expect(isMinHeap(arr)).toBeTruthy();
+        const heap = new MinHeap(utils.random(10, 100));
+        heap.build();
+        expect(heap.isHeap()).toBeTruthy();
+    });
+    it('append a value', () => {
+        const maxHeap = new MaxHeap([96, 78, 39, 77, 68, 37, 8, 3, 39, 37]);
+        maxHeap.build();
+        maxHeap.append(100);
+        expect(maxHeap.items).toEqual([100, 96, 39, 77, 78, 37, 8, 3, 39, 37, 68]);
+
+        const minHeap = new MinHeap([3, 37, 8, 39, 68, 37, 39, 77, 96, 78]);
+        minHeap.build();
+        minHeap.append(5);
+        expect(minHeap.items).toEqual([3, 5, 8, 39, 37, 37, 39, 77, 96, 78, 68]);
+    });
+    it('isHeap', () => {
+        const heap = new MaxHeap([96, 78, 39, 77, 100, 68, 37, 8, 3, 39, 37]);
+        expect(heap.isHeap()).toBeFalsy();
+        heap.build();
+        expect(heap.isHeap()).toBeTruthy();
+    });
+    it('increase key', () => {
+        const items = [96, 78, 39, 77, 68, 37, 8, 3, 39, 37];
+        const heap = new MaxHeap(items);
+        heap.build();
+        heap.increaseKey(5, 100);
+        expect(heap.items).toEqual([100, 78, 96, 77, 68, 39, 8, 3, 39, 37]);
+    });
+    it('max related functions', () => {
+        const items = [96, 78, 39, 77, 68, 37, 8, 3, 39, 37];
+        const heap = new MaxHeap(items);
+        heap.build();
+        expect(heap.maximum()).toEqual(96);
+        expect(heap.heapSize).toEqual(items.length);
+        expect(heap.extractMax()).toEqual(96);
+        expect(heap.heapSize).toEqual(items.length - 1);
+    });
+
+    it('decrease key', () => {
+        const items = [3, 37, 8, 39, 68, 37, 39, 77, 96, 78];
+        const heap = new MinHeap(items);
+        heap.build();
+        heap.decreaseKey(5, 1);
+        expect(heap.items).toEqual([1, 37, 3, 39, 68, 8, 39, 77, 96, 78]);
+    });
+    it('mix related functions', () => {
+        const items = [3, 37, 8, 39, 68, 37, 39, 77, 96, 78];
+        const heap = new MinHeap(items);
+        heap.build();
+        expect(heap.minimum()).toEqual(3);
+        expect(heap.heapSize).toEqual(items.length);
+        expect(heap.extractMin()).toEqual(3);
+        expect(heap.heapSize).toEqual(items.length - 1);
     });
 });

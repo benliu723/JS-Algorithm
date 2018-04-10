@@ -1,25 +1,27 @@
 // @flow
-import { buildMaxHeap, buildMinHeap, maxHeapify, minHeapify } from '../../ds/heap';
+import { MaxHeap, MinHeap } from '../../ds/heap';
 import * as utils from '../../utils';
 
-export const heapSort = (arr: Array<number>) => {
-    const heap = buildMaxHeap(arr);
+export const heapSort = (items: Array<number>) => {
+    const heap = new MaxHeap(items);
+    heap.build();
     let i = heap.heapSize - 1;
     while (i > 0) {
-        utils.swap(arr, 0, i);
+        utils.swap(heap.items, 0, i);
         heap.heapSize -= 1;
-        maxHeapify(heap, 0);
+        heap.heapify(0);
         i -= 1;
     }
 };
 
-export const reverseHeapSort = (arr: Array<number>) => {
-    const heap = buildMinHeap(arr);
+export const reverseHeapSort = (items: Array<number>) => {
+    const heap = new MinHeap(items);
+    heap.build();
     let i = heap.heapSize - 1;
     while (i > 0) {
-        utils.swap(arr, 0, i);
+        utils.swap(heap.items, 0, i);
         heap.heapSize -= 1;
-        minHeapify(heap, 0);
+        heap.heapify(0);
         i -= 1;
     }
 };
