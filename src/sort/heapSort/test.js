@@ -1,5 +1,5 @@
 // @flow
-import { heapSort, reverseHeapSort } from '.';
+import heapSort from '.';
 
 describe('heap sort', () => {
     it('min -> max order', () => {
@@ -9,7 +9,7 @@ describe('heap sort', () => {
     });
     it('max -> min order', () => {
         const arr = [78, 96, 39, 77, 68, 37, 8, 3, 39, 37];
-        reverseHeapSort(arr, (a, b) => a < b);
+        heapSort(arr, (a, b) => a < b);
         expect(arr).toEqual([96, 78, 77, 68, 39, 39, 37, 37, 8, 3]);
     });
 });
