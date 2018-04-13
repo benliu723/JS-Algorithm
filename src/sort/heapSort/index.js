@@ -1,5 +1,5 @@
 // @flow
-import { Heap } from '../../ds/heap';
+import Heap from '../../ds/heap';
 import * as utils from '../../utils';
 
 const heapSort = <T>(items: Array<T>, comp: (T, T) => boolean) => {
