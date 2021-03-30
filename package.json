@@ -2,76 +2,33 @@
   "name": "js-algorithm",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "pretest": "flow && eslint .",
     "test": "jest --coverage",
-    "precommit": "lint-staged && yarn jest --coverage"
+    "precommit": "lint-staged && jest --coverage"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    "*.{json,md}": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "author": "benliu723@gmail.com",
   "license": "ISC",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.2",
-    "babel-jest": "^22.4.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-flow": "^6.23.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-flowtype": "^2.46.1",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.69.0",
-    "flow-typed": "^2.4.0",
-    "husky": "^0.14.3",
-    "jest": "^22.4.3",
-    "lint-staged": "^7.0.2",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14"
-  },
-  "jest": {
-    "verbose": true,
-    "collectCoverageFrom": [
-      "**/*.{js}",
-      "!**/node_modules/**",
-      "!.eslintrc.js",
-      "!**/dist/"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/coverage/",
-      "/example/",
-      "/dist/",
-      "webpack.config.js"
-    ],
-    "coverageReporters": ["text"],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "watchPathIgnorePatterns": [
-      "<rootDir>/\\node_modules/",
-      "<rootDir>/\\coverage/",
-      "<rootDir>/\\example/",
-      "<rootDir>/\\dist/"
-    ]
-  },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "ts-jest": "^26.5.4",
+    "tslint": "^6.1.3",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-plugin-prettier": "^2.3.0"
   }
 }
