@@ -1,5 +1,3 @@
 node_modules
-flow-typed
 coverage
 .npm
-.flow-typed
