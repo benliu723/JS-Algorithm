@@ -20,6 +20,9 @@
         "ter-indent": [
             false
         ],
+        "prefer-array-literal": [
+            false
+        ],
         "ter-arrow-parens": [
             true,
             "as-needed"
