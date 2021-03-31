@@ -1,15 +1,16 @@
 {
   "name": "js-algorithm",
   "version": "1.0.0",
-  "description": "",
+  "description": "js algorithm implementation.",
   "scripts": {
-    "pretest": "flow && eslint .",
-    "test": "jest --coverage",
+    "pretest": "tslint .",
+    "test": "jest",
+    "test_watch": "jest --watchAll",
     "precommit": "lint-staged && jest --coverage"
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "tslint --fix",
       "git add"
     ],
     "*.{json,md}": [
@@ -23,9 +24,11 @@
     "typescript": "^4.2.3"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.22",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
     "ts-jest": "^26.5.4",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
