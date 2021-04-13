@@ -23,6 +23,7 @@
         "prefer-array-literal": [
             false
         ],
+        "no-increment-decrement": [false],
         "ter-arrow-parens": [
             true,
             "as-needed"
