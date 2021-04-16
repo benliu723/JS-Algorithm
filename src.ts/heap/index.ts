@@ -11,18 +11,18 @@ export default class Heap<T> {
         this.comparator = comparator;
         this.buildHeap();
     }
-    left(i: number) {
+    static left(i: number) {
         return i * 2 + 1;
     }
-    right(i: number) {
+    static right(i: number) {
         return (i + 1) * 2;
     }
-    parent(i: number) {
+    static parent(i: number) {
         return Math.ceil(i / 2) - 1;
     }
     heapify(i: number) {
-        const left = this.left(i);
-        const right = this.right(i);
+        const left = Heap.left(i);
+        const right = Heap.right(i);
         let largest = i;
         if (
             i < this.heapSize &&
@@ -46,6 +46,26 @@ export default class Heap<T> {
         for (let i = this.heapSize / 2 - 1; i >= 0; i--) {
             this.heapify(i);
         }
+    }
+
+    static isHeap<K>(
+        list: Array<K>,
+        comparator: (item1: K, item2: K) => boolean
+    ): boolean {
+        let flag = true;
+        const i = 0;
+        while (i > list.length / 2) {
+            const left = Heap.left(i);
+            const right = Heap.left(i);
+            if (
+                comparator(list[left], list[i]) ||
+                comparator(list[right], list[i])
+            ) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 
     static buildMinHeap<K>(list: Array<K>, iteratees: string): Heap<K> {
