@@ -48,26 +48,6 @@ export default class Heap<T> {
         }
     }
 
-    static isHeap<K>(
-        list: Array<K>,
-        comparator: (item1: K, item2: K) => boolean
-    ): boolean {
-        let flag = true;
-        const i = 0;
-        while (i > list.length / 2) {
-            const left = Heap.left(i);
-            const right = Heap.left(i);
-            if (
-                comparator(list[left], list[i]) ||
-                comparator(list[right], list[i])
-            ) {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }
-
     static buildMinHeap<K>(list: Array<K>, iteratees: string): Heap<K> {
         return new Heap(
             list,
@@ -104,5 +84,25 @@ export default class Heap<T> {
             heap.heapify(0);
         }
         return heap.list;
+    }
+
+    static isHeap<K>(
+        list: Array<K>,
+        comparator: (item1: K, item2: K) => boolean
+    ): boolean {
+        let flag = true;
+        const i = 0;
+        while (i > list.length / 2) {
+            const left = Heap.left(i);
+            const right = Heap.left(i);
+            if (
+                comparator(list[left], list[i]) ||
+                comparator(list[right], list[i])
+            ) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 }
